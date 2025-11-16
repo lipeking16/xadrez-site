@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Pacote Didático Xadrez com Z</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="Pacote Didático Xadrez com Z – material completo, visual e gamificado para professores de xadrez que querem transformar suas aulas com organização, engajamento e profissionalismo."
+  />
+  <style>
+    :root {
+      --bg-dark: #05060a;
+      --bg-section: #0b0d14;
+      --accent: #f8b400;
+      --accent-soft: rgba(248, 180, 0, 0.12);
+      --text-main: #f5f5f5;
+      --text-muted: #b3b3b3;
+      --border-soft: #252838;
+      --danger: #ff5a5f;
+      --success: #00c896;
+      --max-width: 1120px;
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.45);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: radial-gradient(circle at top, #15182a 0, #05060a 45%);
+      color: var(--text-main);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      min-height: 100vh;
+      padding: 24px 16px 48px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--max-width);
+    }
+
+    header.site-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      gap: 16px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .logo-mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      background: radial-gradient(circle at 30% 20%, #ffe9a3, #f8b400);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 24px rgba(248, 180, 0, 0.6);
+      font-size: 1.3rem;
+    }
+
+    .logo-sub {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: none;
+      letter-spacing: normal;
+      font-weight: 400;
+    }
+
+    .header-cta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .pill {
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(248, 180, 0, 0.45);
+      background: linear-gradient(
+        90deg,
+        rgba(248, 180, 0, 0.08),
+        rgba(248, 180, 0, 0)
+      );
+      font-size: 0.78rem;
+      color: #ffdfa3;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      border: none;
+      outline: none;
+      cursor: pointer;
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #f8b400, #ffcf5f);
+      color: #2a1b04;
+      font-weight: 700;
+      font-size: 0.92rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 10px 25px rgba(248, 180, 0, 0.4);
+      transition: transform 0.15s ease, box-shadow 0.15s ease,
+        filter 0.15s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 35px rgba(248, 180, 0, 0.55);
+      filter: brightness(1.02);
+    }
+
+    .btn-primary:active {
+      transform: translateY(1px);
+      box-shadow: 0 8px 18px rgba(248, 180, 0, 0.45);
+    }
+
+    .btn-secondary {
+      border-radius: 999px;
+      border: 1px solid var(--border-soft);
+      background: rgba(9, 11, 20, 0.9);
+      padding: 10px 18px;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: border 0.15s ease, background 0.15s ease, color 0.15s ease,
+        transform 0.15s ease;
+    }
+
+    .btn-secondary:hover {
+      border-color: rgba(248, 180, 0, 0.7);
+      background: rgba(12, 14, 26, 0.98);
+      color: #fdfdfd;
+      transform: translateY(-1px);
+    }
+
+    main {
+      width: 100%;
+    }
+
+    .hero {
+      margin-top: 8px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
+      gap: 32px;
+      align-items: center;
+    }
+
+    @media (max-width: 880px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      header.site-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .header-cta {
+        align-self: stretch;
+        justify-content: space-between;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .page {
+        padding: 16px 12px 40px;
+      }
+      .header-cta {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .hero-tagline {
+      font-size: 0.85rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-weight: 600;
+    }
+
+    .hero-title {
+      font-size: clamp(1.9rem, 3.1vw, 2.5rem);
+      font-weight: 800;
+      letter-spacing: 0.02em;
+    }
+
+    .hero-title span {
+      color: var(--accent);
+    }
+
+    .hero-subtitle {
+      font-size: 1rem;
+      color: var(--text-muted);
+      max-width: 580px;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .badge {
+      font-size: 0.78rem;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      background: rgba(17, 18, 30, 0.9);
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero-actions {
+      margin-top: 10px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .hero-note {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .hero-note span {
+      color: #ffffff;
+      font-weight: 500;
+    }
+
+    .hero-right {
+      background: radial-gradient(circle at top, #262a41, #080914);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 18px 18px 20px;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .hero-right-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.86rem;
+      color: var(--text-muted);
+    }
+
+    .hero-price {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 2px;
+    }
+
+    .hero-price-old {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      text-decoration: line-through;
+      opacity: 0.6;
+    }
+
+    .hero-price-current {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .hero-grid {
+      margin-top: 4px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      font-size: 0.8rem;
+    }
+
+    .hero-grid-item {
+      padding: 8px 9px;
+      border-radius: 10px;
+      background: rgba(7, 9, 18, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .hero-grid-item strong {
+      font-size: 0.82rem;
+    }
+
+    .hero-grid-item span {
+      color: var(--text-muted);
+      font-size: 0.76rem;
+    }
+
+    .hero-right-cta {
+      margin-top: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .hero-guarantee {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .section {
+      margin-top: 40px;
+      background: linear-gradient(
+        135deg,
+        rgba(15, 18, 32, 0.96),
+        rgba(7, 9, 18, 0.98)
+      );
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 24px 20px 22px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+    }
+
+    .section-header {
+      margin-bottom: 14px;
+    }
+
+    .section-kicker {
+      font-size: 0.8rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .section-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    .section p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-top: 6px;
+    }
+
+    .list {
+      margin-top: 10px;
+      display: grid;
+      gap: 8px;
+      font-size: 0.94rem;
+    }
+
+    .list-item {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+      color: var(--text-muted);
+    }
+
+    .list-item-icon {
+      font-size: 1rem;
+      margin-top: 2px;
+    }
+
+    .list-strong span {
+      display: block;
+    }
+
+    .list-strong span:first-child {
+      font-weight: 600;
+      color: #ffffff;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 24px;
+    }
+
+    @media (max-width: 820px) {
+      .grid-2 {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .card {
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-soft);
+      background: rgba(8, 9, 18, 0.95);
+      padding: 14px 13px;
+      font-size: 0.9rem;
+    }
+
+    .card-title {
+      font-weight: 600;
+      margin-bottom: 4px;
+      font-size: 0.95rem;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .chip {
+      font-size: 0.78rem;
+      padding: 5px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      background: rgba(14, 16, 28, 0.9);
+      color: var(--text-muted);
+    }
+
+    .pill-danger {
+      border-color: rgba(255, 90, 95, 0.5);
+      background: rgba(255, 90, 95, 0.06);
+      color: #ffb3b5;
+    }
+
+    .pill-success {
+      border-color: rgba(0, 200, 150, 0.5);
+      background: rgba(0, 200, 150, 0.09);
+      color: #9df5da;
+    }
+
+    .highlight-box {
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(248, 180, 0, 0.45);
+      background: radial-gradient(circle at top left, #3a2a12, #110d08);
+      padding: 14px 13px;
+      font-size: 0.9rem;
+      color: #fdf3d2;
+    }
+
+    .highlight-box strong {
+      color: #ffffff;
+    }
+
+    .columns-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 720px) {
+      .columns-2 {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .faq-item {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 10px 0;
+    }
+
+    .faq-question {
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+
+    .faq-answer {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .footer {
+      margin-top: 28px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-align: center;
+      opacity: 0.8;
+    }
+
+    .footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="container">
+      <!-- HEADER -->
+      <header class="site-header">
+        <div class="logo">
+          <div class="logo-mark">♟</div>
+          <div>
+            <div>Xadrez com Z</div>
+            <div class="logo-sub">Pacote Didático para Professores</div>
+          </div>
+        </div>
+
+        <div class="header-cta">
+          <div class="pill">
+            <span>💎 Conteúdo Premium</span>
+          </div>
+          <button class="btn-primary" onclick="scrollToSection('cta-final')">
+            Quero esse material
+            <span>→</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- HERO -->
+      <section class="hero">
+        <div class="hero-left">
+          <div class="hero-tagline">pacote didático xadrez com z</div>
+          <h1 class="hero-title">
+            Transforme suas aulas de xadrez em experiências
+            <span>envolventes, organizadas e inesquecíveis</span>.
+          </h1>
+          <p class="hero-subtitle">
+            Receba um pacote didático completo, visual, gamificado e pronto
+            para uso, criado por um professor especialista que já impactou
+            milhares de alunos em ambiente escolar.
+          </p>
+
+          <div class="hero-badges">
+            <div class="badge">⏱ Economize horas de planejamento</div>
+            <div class="badge">🎮 Aulas mais dinâmicas e engajadoras</div>
+            <div class="badge">📚 Conteúdo pronto, organizado e imprimível</div>
+          </div>
+
+          <div class="hero-actions">
+            <button class="btn-primary" onclick="scrollToSection('cta-final')">
+              Sim, quero transformar minhas aulas
+              <span>↓</span>
+            </button>
+            <button class="btn-secondary" onclick="scrollToSection('sobre-pacote')">
+              Ver tudo o que está incluído
+            </button>
+          </div>
+
+          <div class="hero-note">
+            <span>Ideal para professores, escolas, clubes e projetos</span> que
+            querem elevar o nível do ensino de xadrez sem começar do zero.
+          </div>
+        </div>
+
+        <aside class="hero-right">
+          <div class="hero-right-header">
+            <div>Pacote Didático Xadrez com Z</div>
+            <div class="hero-price">
+              <span class="hero-price-old">Valor real de produção: R$ 800+</span>
+              <span class="hero-price-current">Oferta especial para professores</span>
+            </div>
+          </div>
+
+          <div class="hero-grid">
+            <div class="hero-grid-item">
+              <strong>Material completo</strong>
+              <span>Decoração, cartinhas, jogos, atividades, planos de aula e muito mais.</span>
+            </div>
+            <div class="hero-grid-item">
+              <strong>Uso imediato</strong>
+              <span>Baixe, imprima ou edite no Canva e aplique em sala.</span>
+            </div>
+            <div class="hero-grid-item">
+              <strong>Aplicado em escolas reais</strong>
+              <span>Conteúdo testado em turmas do fundamental.</span>
+            </div>
+            <div class="hero-grid-item">
+              <strong>Atualizações inclusas</strong>
+              <span>Seu acervo cresce sem custo adicional.</span>
+            </div>
+          </div>
+
+          <div class="hero-right-cta">
+            <button class="btn-primary" onclick="scrollToSection('cta-final')">
+              Quero garantir meu acesso agora
+              <span>✔</span>
+            </button>
+            <div class="hero-guarantee">
+              <span>🔒</span>
+              <span>Acesso digital seguro, materiais organizados e suporte direto.</span>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <!-- PROBLEMA -->
+      <section class="section" id="problema">
+        <div class="section-header">
+          <div class="section-kicker">o problema</div>
+          <h2 class="section-title">
+            Planejar boas aulas de xadrez é um desafio real para a maioria dos professores.
+          </h2>
+        </div>
+        <p>
+          Você provavelmente já passou por isso: sabe o quanto o xadrez é poderoso
+          para desenvolver raciocínio, atenção e disciplina, mas na prática do dia a dia
+          falta tempo, recurso visual e material organizado para transformar tudo isso em
+          aulas consistentes.
+        </p>
+
+        <div class="list" style="margin-top: 14px;">
+          <div class="list-item">
+            <div class="list-item-icon">❌</div>
+            <div>Falta material visual bonito, profissional e adequado ao ambiente escolar.</div>
+          </div>
+          <div class="list-item">
+            <div class="list-item-icon">❌</div>
+            <div>Você perde horas procurando atividades soltas na internet e adaptando tudo na correria.</div>
+          </div>
+          <div class="list-item">
+            <div class="list-item-icon">❌</div>
+            <div>Os alunos se desengajam quando a aula fica só em explicação e tabuleiro tradicional.</div>
+          </div>
+          <div class="list-item">
+            <div class="list-item-icon">❌</div>
+            <div>A escola cobra resultado, torneios, projetos… mas não oferece um pacote didático estruturado.</div>
+          </div>
+        </div>
+
+        <p style="margin-top: 14px;">
+          No final, sobra improviso, cansaço e a sensação de que as aulas poderiam ser muito
+          melhores — se você tivesse os recursos certos.
+        </p>
+      </section>
+
+      <!-- SOLUÇÃO / SOBRE O PACOTE -->
+      <section class="section" id="sobre-pacote">
+        <div class="grid-2">
+          <div>
+            <div class="section-header">
+              <div class="section-kicker">a solução</div>
+              <h2 class="section-title">
+                Um pacote didático completo, pronto para uso e pensado para a realidade da sala de aula.
+              </h2>
+            </div>
+            <p>
+              O Pacote Didático Xadrez com Z é um sistema de materiais profissionais desenvolvido
+              por um professor especialista em xadrez na educação, testado com centenas de turmas
+              e refinado na prática. Não é um “combo de PDFs soltos”, mas um conjunto coerente
+              de ferramentas para transformar o ensino do xadrez na sua escola.
+            </p>
+            <p style="margin-top: 10px;">
+              Você recebe decorações, cartinhas, jogos, desafios, listas de exercícios, planos de aula,
+              materiais editáveis e um sistema gamificado de missão e recompensa — tudo alinhado
+              para tornar suas aulas mais organizadas, engajadoras e eficientes.
+            </p>
+          </div>
+
+          <div>
+            <div class="card">
+              <div class="card-title">Em resumo, o pacote entrega:</div>
+              <div class="list">
+                <div class="list-item">
+                  <div class="list-item-icon">✅</div>
+                  <div>Visual profissional e padronizado para a sala de xadrez.</div>
+                </div>
+                <div class="list-item">
+                  <div class="list-item-icon">✅</div>
+                  <div>Aulas mais dinâmicas, com jogos, cartinhas e desafios.</div>
+                </div>
+                <div class="list-item">
+                  <div class="list-item-icon">✅</div>
+                  <div>Materiais prontos que economizam tempo de planejamento.</div>
+                </div>
+                <div class="list-item">
+                  <div class="list-item-icon">✅</div>
+                  <div>Atualizações constantes, sem que você precise criar tudo do zero.</div>
+                </div>
+              </div>
+            </div>
+            <div class="highlight-box" style="margin-top: 10px;">
+              <strong>Resultado:</strong> mais engajamento dos alunos, mais organização para você e um
+              ensino de xadrez que se torna referência dentro da escola.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- O QUE O PROFESSOR RECEBE -->
+      <section class="section" id="conteudo">
+        <div class="section-header">
+          <div class="section-kicker">o que você recebe</div>
+          <h2 class="section-title">
+            Tudo o que um professor precisa para ter aulas de xadrez completas, bonitas e organizadas.
+          </h2>
+        </div>
+
+        <div class="columns-2">
+          <div>
+            <div class="list list-strong">
+              <div class="list-item">
+                <div class="list-item-icon">🎨</div>
+                <div>
+                  <span>Decoração da sala</span>
+                  <span>Murais, faixas, posters e elementos visuais para transformar a sala em um ambiente temático, inspirador e profissional.</span>
+                </div>
+              </div>
+              <div class="list-item">
+                <div class="list-item-icon">🃏</div>
+                <div>
+                  <span>Cartinhas pedagógicas</span>
+                  <span>Cartas de peças, aberturas, dicas, missões, recompensas e desafios para tornar qualquer conteúdo mais dinâmico e interativo.</span>
+                </div>
+              </div>
+              <div class="list-item">
+                <div class="list-item-icon">🎮</div>
+                <div>
+                  <span>Jogos didáticos</span>
+                  <span>Dinâmicas prontas para ensinar conceitos de forma prática, divertida e memorável.</span>
+                </div>
+              </div>
+              <div class="list-item">
+                <div class="list-item-icon">📘</div>
+                <div>
+                  <span>Atividades, desafios e exercícios</span>
+                  <span>Conteúdos graduados do básico ao avançado, prontos para serem impressos e aplicados.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="list list-strong">
+              <div class="list-item">
+                <div class="list-item-icon">📝</div>
+                <div>
+                  <span>Listas de exercícios</span>
+                  <span>Perfeitas para reforço, avaliação, lição de casa e acompanhamento da evolução dos alunos.</span>
+                </div>
+              </div>
+              <div class="list-item">
+                <div class="list-item-icon">📚</div>
+                <div>
+                  <span>Planos de aula estruturados</span>
+                  <span>Planejamento organizado e progressivo, para você parar de improvisar e ter sempre uma sequência clara a seguir.</span>
+                </div>
+              </div>
+              <div class="list-item">
+                <div class="list-item-icon">✏</div>
+                <div>
+                  <span>Materiais editáveis no Canva</span>
+                  <span>Arquivos personalizáveis para você adaptar à sua escola, turmas e identidade visual.</span>
+                </div>
+              </div>
+              <div class="list-item">
+                <div class="list-item-icon">🎖</div>
+                <div>
+                  <span>Sistema de missão e recompensa</span>
+                  <span>Uma abordagem gamificada que aumenta motivação, disciplina e envolvimento dos alunos nas aulas.</span>
+                </div>
+              </div>
+              <div class="list-item">
+                <div class="list-item-icon">♟</div>
+                <div>
+                  <span>Mini torneios e kits escolares</span>
+                  <span>Estrutura pronta para organizar torneios internos, desafios entre equipes e eventos especiais de xadrez na escola.</span>
+                </div>
+              </div>
+              <div class="list-item">
+                <div class="list-item-icon">🔄</div>
+                <div>
+                  <span>Atualizações constantes</span>
+                  <span>Novos materiais, cartinhas, jogos e melhorias incluídos no pacote, sem custo adicional.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- BENEFÍCIOS PRÁTICOS -->
+      <section class="section" id="beneficios">
+        <div class="section-header">
+          <div class="section-kicker">benefícios reais</div>
+          <h2 class="section-title">
+            Não é só material bonito: é economia de tempo, organização e mais aprendizado para os alunos.
+          </h2>
+        </div>
+
+        <div class="columns-2">
+          <div>
+            <div class="list">
+              <div class="list-item">
+                <div class="list-item-icon">⏱</div>
+                <div>
+                  <strong>Economize dezenas de horas de planejamento</strong><br />
+                  Pare de começar do zero toda semana. Tenha uma base sólida de aulas, atividades e jogos sempre pronta.
+                </div>
+              </div>
+              <div class="list-item">
+                <div class="list-item-icon">🎯</div>
+                <div>
+                  <strong>Aulas mais engajadoras e disciplina em sala</strong><br />
+                  Alunos que participam ativamente tendem a se concentrar mais e respeitar melhor o ambiente da aula.
+                </div>
+              </div>
+              <div class="list-item">
+                <div class="list-item-icon">📚</div>
+                <div>
+                  <strong>Ensino progressivo e organizado</strong><br />
+                  Conteúdo pensado para evoluir do básico ao avançado, com coerência pedagógica.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="list">
+              <div class="list-item">
+                <div class="list-item-icon">🏫</div>
+                <div>
+                  <strong>Diferencial profissional dentro da escola</strong><br />
+                  A direção percebe a organização, o cuidado visual e o impacto que suas aulas causam nos alunos.
+                </div>
+              </div>
+              <div class="list-item">
+                <div class="list-item-icon">😌</div>
+                <div>
+                  <strong>Menos estresse, mais segurança</strong><br />
+                  Você entra na sala sabendo exatamente o que fazer, com material preparado e estruturado.
+                </div>
+              </div>
+              <div class="list-item">
+                <div class="list-item-icon">💡</div>
+                <div>
+                  <strong>Pronto para projetos, eventos e torneios</strong><br />
+                  Tenha sempre à mão recursos para montar torneios, murais, campanhas internas e exposições de xadrez.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PARA QUEM É / NÃO É -->
+      <section class="section" id="para-quem">
+        <div class="grid-2">
+          <div>
+            <div class="section-header">
+              <div class="section-kicker">para quem é</div>
+              <h2 class="section-title">
+                Ideal para professores e instituições que levam o xadrez a sério.
+              </h2>
+            </div>
+            <div class="list">
+              <div class="list-item">
+                <div class="list-item-icon">✅</div>
+                <div>Professores de xadrez do ensino fundamental I e II.</div>
+              </div>
+              <div class="list-item">
+                <div class="list-item-icon">✅</div>
+                <div>Escolas que querem profissionalizar o ensino de xadrez.</div>
+              </div>
+              <div class="list-item">
+                <div class="list-item-icon">✅</div>
+                <div>Instrutores de clubes, projetos sociais, ONGs e secretarias de educação.</div>
+              </div>
+              <div class="list-item">
+                <div class="list-item-icon">✅</div>
+                <div>Professores iniciantes que ainda não têm acervo organizado.</div>
+              </div>
+              <div class="list-item">
+                <div class="list-item-icon">✅</div>
+                <div>Professores experientes que querem renovar o visual e a metodologia das aulas.</div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="card">
+              <div class="section-kicker" style="margin-bottom: 6px;">para quem não é</div>
+              <div class="list">
+                <div class="list-item">
+                  <div class="list-item-icon">⛔</div>
+                  <div>Quem procura apenas materiais gratuitos ou improvisados.</div>
+                </div>
+                <div class="list-item">
+                  <div class="list-item-icon">⛔</div>
+                  <div>Quem não pretende aplicar um método organizado e consistente.</div>
+                </div>
+                <div class="list-item">
+                  <div class="list-item-icon">⛔</div>
+                  <div>Quem não vê valor em materiais profissionais e bem acabados.</div>
+                </div>
+                <div class="list-item">
+                  <div class="list-item-icon">⛔</div>
+                  <div>Quem não está disposto a melhorar a experiência dos alunos em sala de aula.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- AUTORIDADE -->
+      <section class="section" id="autor">
+        <div class="grid-2">
+          <div>
+            <div class="section-header">
+              <div class="section-kicker">quem criou</div>
+              <h2 class="section-title">
+                Criado por um professor que vive a realidade da sala de aula.
+              </h2>
+            </div>
+            <p>
+              O Pacote Didático Xadrez com Z foi desenvolvido por <strong>Fhellipe Augusto</strong>,
+              bacharel em Educação Física, com especializações em <strong>Xadrez Técnico e Pedagógico</strong>
+              e <strong>Xadrez na Educação</strong>.
+            </p>
+            <p style="margin-top: 8px;">
+              Apaixonado pelo jogo desde os 9 anos, Fhellipe dedica sua carreira ao ensino do xadrez,
+              impactando mais de <strong>2.000 crianças e adolescentes</strong> com aulas em escolas, projetos e eventos.
+            </p>
+            <p style="margin-top: 8px;">
+              É o criador da página <strong>@xadrezcomz</strong> no Instagram, que já ultrapassou
+              <strong>130 mil seguidores</strong>, com conteúdo focado em popularizar o xadrez de forma didática,
+              moderna e acessível.
+            </p>
+          </div>
+
+          <div>
+            <div class="card">
+              <div class="card-title">Por que isso importa para você?</div>
+              <p>
+                Porque cada material do pacote foi pensado, testado e ajustado na prática com turmas reais,
+                levando em conta o que funciona com alunos de diferentes idades e perfis.
+              </p>
+              <div class="chips">
+                <div class="chip pill-success">+2.000 alunos impactados</div>
+                <div class="chip">Experiência em escolas e projetos</div>
+                <div class="chip">Conteúdo alinhado à educação</div>
+                <div class="chip">@xadrezcomz • 130k+</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ATUALIZAÇÕES / GARANTIA / OFERTA -->
+      <section class="section" id="oferta">
+        <div class="section-header">
+          <div class="section-kicker">oferta completa</div>
+          <h2 class="section-title">
+            Um ecossistema didático em evolução constante — e você recebe tudo.
+          </h2>
+        </div>
+
+        <p>
+          Este não é um pacote estático. Novas cartinhas, jogos, atividades e visuais estão sendo
+          desenvolvidos continuamente e passam a fazer parte do acervo que você terá acesso.
+        </p>
+
+        <div class="columns-2" style="margin-top: 14px;">
+          <div>
+            <div class="card">
+              <div class="card-title">Você leva hoje:</div>
+              <div class="list">
+                <div class="list-item">
+                  <div class="list-item-icon">✔</div>
+                  <div>Pacote completo com todos os materiais atuais.</div>
+                </div>
+                <div class="list-item">
+                  <div class="list-item-icon">✔</div>
+                  <div>Atualizações inclusas, sem custo adicional.</div>
+                </div>
+                <div class="list-item">
+                  <div class="list-item-icon">✔</div>
+                  <div>Arquivos editáveis no Canva.</div>
+                </div>
+                <div class="list-item">
+                  <div class="list-item-icon">✔</div>
+                  <div>Conteúdos organizados para uso imediato.</div>
+                </div>
+              </div>
+            </div>
+            <div class="card" style="margin-top: 10px;">
+              <div class="card-title">Garantia e segurança</div>
+              <div class="list">
+                <div class="list-item">
+                  <div class="list-item-icon">🔒</div>
+                  <div>Acesso digital seguro à plataforma de entrega.</div>
+                </div>
+                <div class="list-item">
+                  <div class="list-item-icon">📩</div>
+                  <div>Suporte em caso de dúvidas sobre uso e aplicação.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="highlight-box">
+              <strong>Seu investimento é pequeno</strong> perto do tempo, da energia e da qualidade
+              que você ganha em cada aula ministrada.
+              <br /><br />
+              Em vez de gastar horas criando tudo sozinho, você passa a focar no que importa:
+              <strong>ensinar xadrez com impacto, método e prazer.</strong>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA FINAL / FECHAMENTO EMOCIONAL -->
+      <section class="section" id="cta-final">
+        <div class="section-header">
+          <div class="section-kicker">decisão</div>
+          <h2 class="section-title">
+            Suas aulas de xadrez podem continuar no improviso — ou podem dar um salto de qualidade a partir de hoje.
+          </h2>
+        </div>
+
+        <p>
+          Todo professor sabe: uma boa aula não nasce do improviso, mas da preparação. Com o Pacote Didático
+          Xadrez com Z, você terá segurança, organização, beleza visual e resultados reais na aprendizagem
+          dos alunos.
+        </p>
+        <p style="margin-top: 8px;">
+          Seus alunos vão sentir a diferença. A direção da escola vai notar a evolução. E você vai ensinar
+          com mais leveza, confiança e propósito.
+        </p>
+
+        <div style="margin-top: 16px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center;">
+          <!-- Substitua o href pelo link da sua página de checkout -->
+          <a href="#"
+             class="btn-primary">
+            Sim, quero esse pacote didático agora
+          </a>
+          <button class="btn-secondary" onclick="scrollToSection('beneficios')">
+            Ver novamente os benefícios
+          </button>
+        </div>
+
+        <p class="hero-note" style="margin-top: 10px;">
+          <span>Próximo passo:</span> clique no botão, finalize sua inscrição e receba o acesso
+          ao Pacote Didático Xadrez com Z.
+        </p>
+      </section>
+
+      <!-- FAQ (EXEMPLO BÁSICO) -->
+      <section class="section" id="faq">
+        <div class="section-header">
+          <div class="section-kicker">faq</div>
+          <h2 class="section-title">Perguntas frequentes</h2>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">Preciso saber mexer no Canva para usar o pacote?</div>
+          <div class="faq-answer">
+            Não obrigatoriamente. Você pode simplesmente baixar e imprimir os materiais já prontos.
+            Os arquivos editáveis no Canva são um bônus para personalização, caso queira adaptar textos
+            ou identidade visual.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">Posso usar o material com mais de uma turma?</div>
+          <div class="faq-answer">
+            Sim. O pacote foi pensado exatamente para ser aplicado em diversas turmas e anos letivos,
+            ampliando o retorno que você tem sobre o investimento.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">As atualizações têm custo adicional?</div>
+          <div class="faq-answer">
+            Não. Novos materiais que forem incorporados ao Pacote Didático Xadrez com Z passam a ficar
+            disponíveis para você sem cobrança extra.
+          </div>
+        </div>
+      </section>
+
+      <!-- FOOTER -->
+      <footer class="footer">
+        Pacote Didático Xadrez com Z • Material profissional para professores de xadrez.<br />
+        Siga o trabalho em <a href="https://www.instagram.com/xadrezcomz" target="_blank">@xadrezcomz</a>.
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    function scrollToSection(id) {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  </script>
+</body>
+</html>
